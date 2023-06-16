@@ -745,6 +745,27 @@ class SystemPatchDictionary():
                         },
                     },
                 },
+                "AMD Berbice": {
+                    "Display Name": "Graphics: AMD Berbice",
+                    "OS Support": {
+                        "Minimum OS Support": {
+                            "OS Major": os_data.os_data.ventura,
+                            "OS Minor": 0
+                        },
+                        "Maximum OS Support": {
+                            "OS Major": os_data.os_data.max_os,
+                            "OS Minor": 99
+                        },
+                    },
+                    "Install": {
+                        "/System/Library/Extensions": {
+                            "AMD9500Controller.kext":  "13.0.1 Berbice",
+                            "AMD10000Controller.kext": "13.0.1 Berbice",
+                            "AMDFramebuffer.kext":     "13.0.1 Berbice",
+                            "AMDSupport.kext":         "13.0.1 Berbice",
+                        },
+                    },
+                },
                 "AMD Legacy GCN": {
                     "Display Name": "Graphics: AMD Legacy GCN",
                     "OS Support": {

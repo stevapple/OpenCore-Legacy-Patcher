@@ -52,6 +52,7 @@ class DetectRootPatch:
         self.legacy_gcn     = False
         self.legacy_polaris = False
         self.legacy_vega    = False
+        self.amd_berbice    = False
 
         # Misc Patch Detection
         self.brightness_legacy         = False
@@ -165,12 +166,12 @@ class DetectRootPatch:
                             # full compatibility (namely power states, etc)
                             # Reference: https://github.com/dortania/bugtracker/issues/292
                             # TODO: Probe framebuffer families further
-                            if self.model != "MacBookPro13,3":
-                                if "AVX2" in self.constants.computer.cpu.leafs:
-                                    continue
-                                self.legacy_polaris = True
+                            if self.model == "MacBookPro13,3":
+                                self.amd_berbice = True
+                            if "AVX2" in self.constants.computer.cpu.leafs:
+                                continue
                             else:
-                                self.legacy_gcn = True
+                                self.legacy_polaris = True
                         else:
                             self.legacy_gcn = True
                         self.supports_metal = True
@@ -300,6 +301,7 @@ class DetectRootPatch:
         self.legacy_gcn                = False
         self.legacy_polaris            = False
         self.legacy_vega               = False
+        self.amd_berbice               = False
         self.brightness_legacy         = False
         self.legacy_audio              = False
         self.legacy_gmux               = False
@@ -559,6 +561,7 @@ class DetectRootPatch:
             "Graphics: Nvidia Web Drivers":                self.nvidia_web,
             "Graphics: AMD TeraScale 1":                   self.amd_ts1,
             "Graphics: AMD TeraScale 2":                   self.amd_ts2,
+            "Graphics: AMD Berbice":                       self.amd_berbice,
             "Graphics: AMD Legacy GCN":                    self.legacy_gcn,
             "Graphics: AMD Legacy Polaris":                self.legacy_polaris,
             "Graphics: AMD Legacy Vega":                   self.legacy_vega,

@@ -127,6 +127,15 @@ class GenerateRootPatchSets:
                 # Additionally, AMDRadeonX3000 requires IOAccelerator downgrade which is not installed without 'Non-Metal IOAccelerator Common'
                 del(required_patches["AMD TeraScale 2"]["Install"]["/System/Library/Extensions"]["AMDRadeonX3000.kext"])
 
+        if self.hardware_details["Graphics: AMD Berbice"] is True:
+            if self.hardware_details["Graphics: AMD Legacy GCN"] is True:
+                required_patches.update({"AMD Legacy GCN": all_hardware_patchset["Graphics"]["AMD Legacy GCN"]})
+            else:
+                required_patches.update({"AMD Berbice": all_hardware_patchset["Graphics"]["AMD Berbice"]})
+                required_patches.update({"Revert GVA Downgrade": all_hardware_patchset["Graphics"]["Revert GVA Downgrade"]})
+            if "AVX2" not in self.constants.computer.cpu.leafs:
+                required_patches.update({"AMD OpenCL": all_hardware_patchset["Graphics"]["AMD OpenCL"]})
+
         if self.hardware_details["Graphics: AMD Legacy GCN"] is True or self.hardware_details["Graphics: AMD Legacy Polaris"] is True:
             required_patches.update({"Monterey GVA": all_hardware_patchset["Graphics"]["Monterey GVA"]})
             required_patches.update({"Monterey OpenCL": all_hardware_patchset["Graphics"]["Monterey OpenCL"]})
